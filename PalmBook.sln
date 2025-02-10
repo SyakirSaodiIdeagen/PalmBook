@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PalmBook.Server", "PalmBook.Server\PalmBook.Server.csproj", "{9719A571-2DE2-4AE9-BA34-1C3AC9773814}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "palmbook.client", "palmbook.client\palmbook.client.esproj", "{EEFBBAE7-A87B-43A4-881C-763B05AA4021}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9719A571-2DE2-4AE9-BA34-1C3AC9773814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9719A571-2DE2-4AE9-BA34-1C3AC9773814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9719A571-2DE2-4AE9-BA34-1C3AC9773814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9719A571-2DE2-4AE9-BA34-1C3AC9773814}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEFBBAE7-A87B-43A4-881C-763B05AA4021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEFBBAE7-A87B-43A4-881C-763B05AA4021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEFBBAE7-A87B-43A4-881C-763B05AA4021}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EEFBBAE7-A87B-43A4-881C-763B05AA4021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEFBBAE7-A87B-43A4-881C-763B05AA4021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEFBBAE7-A87B-43A4-881C-763B05AA4021}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
