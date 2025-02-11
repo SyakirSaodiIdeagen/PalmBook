@@ -400,3 +400,6 @@ FodyWeavers.xsd
 *.sln.iml
 /PalmBook.Server/bin
 /palmbook.client/obj
+/PalmBook.Server/obj
+/PalmBook.Server/obj/Debug
+/PalmBook.Server/obj/Debug/net8.0
