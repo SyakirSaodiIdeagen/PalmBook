@@ -398,6 +398,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+*.bin
 /PalmBook.Server/bin
 /palmbook.client/obj
 /PalmBook.Server/obj
