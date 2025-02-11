@@ -1,12 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
+import { MsalService } from '@azure/msal-angular';
+import { AuthenticationResult } from '@azure/msal-browser';
 
 @Component({
   selector: 'app-root',
@@ -14,25 +9,18 @@ interface WeatherForecast {
   standalone: false,
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
-  public forecasts: WeatherForecast[] = [];
-
-  constructor(private http: HttpClient) {}
+export class AppComponent {
+  constructor(private authService: MsalService) { }
 
   ngOnInit() {
-    this.getForecasts();
-  }
-
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result) => {
-        this.forecasts = result;
-      },
-      (error) => {
-        console.error(error);
+    this.authService.instance.handleRedirectPromise().then((result: AuthenticationResult | null) => {
+      if (result !== null && result.account !== null) {
+        this.authService.instance.setActiveAccount(result.account);
       }
-    );
+    });
   }
 
-  title = 'palmbook.client';
+  login() {
+    this.authService.loginRedirect();
+  }
 }
