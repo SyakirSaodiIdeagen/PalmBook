@@ -1,0 +1,41 @@
+<div class="search-container">
+  <div class="search-box">
+    <input [(ngModel)]="query"
+           (keyup.enter)="search()"
+           type="text"
+           class="search-input"
+           placeholder="Search files..." />
+  </div>
+
+  <!-- Loading Indicator -->
+  <div class="loading" *ngIf="loading">Searching...</div>
+
+  <!-- No Results Message (Centered) -->
+  <div class="no-results" *ngIf="!loading && searched && results.length === 0">
+    No files found.
+  </div>
+
+  <!-- Search Results Table -->
+  <div class="results-container" *ngIf="!loading && results.length > 0">
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>File Name</th>
+          <th>File Type</th>
+          <th>Source</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let file of results">
+          <td>{{ file.name }}</td>
+          <td>{{ file.type }}</td>
+          <td>{{ file.source }}</td>
+          <td>
+            <a [href]="file.downloadUrl" class="download-btn" download>Download</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
