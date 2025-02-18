@@ -22,7 +22,8 @@ func GetEsClient() *elasticsearch.Client {
 
 	cfg := elasticsearch.Config{
 		Addresses: []string{
-			"http://localhost:9200",
+			//"http://localhost:9200",     //local
+			"http://elasticsearch:9200", //docker
 		},
 		Username: "elastic",
 		Password: "password1!",
@@ -111,12 +112,7 @@ func GetAll() []string {
 }
 
 func DeleteDocumentsBulk(ids []string) {
-	es, err := elasticsearch.NewClient(elasticsearch.Config{
-		Addresses: []string{"http://localhost:9200"},
-	})
-	if err != nil {
-		log.Fatalf("Error creating Elasticsearch client: %s", err)
-	}
+	es := GetEsClient()
 
 	var buf bytes.Buffer
 

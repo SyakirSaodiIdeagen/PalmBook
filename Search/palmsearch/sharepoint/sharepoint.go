@@ -113,7 +113,7 @@ func GetSites(token string) {
 	fmt.Println("Response Status:", resp.Status)
 	fmt.Println("Get Site Response Body:", gsr)
 
-	selectedSites := []string{"palmbook"}
+	selectedSites := []string{}
 	filteredSites := filterSites(gsr, selectedSites)
 	GetLists(filteredSites)
 	log.Println("sync complete")
