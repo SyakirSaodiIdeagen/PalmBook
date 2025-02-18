@@ -26,8 +26,4 @@ export class LoginComponent {
     }
   }
 
-  redirect() {
-    this.router.navigate(['/']);
-  }
-
 }
