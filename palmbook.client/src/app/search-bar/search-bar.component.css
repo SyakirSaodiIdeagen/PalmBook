@@ -4,9 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background-color: #f9f9f9;
-  padding: 20px;
+  min-height: 80vh;
 }
 
 /* Search box */
@@ -81,14 +79,12 @@
   }
 
   .results-table tr:hover {
-    background: #f1f1f1;
   }
 
 /* Download button */
 .download-btn {
   display: inline-block;
   padding: 6px 12px;
-  background: #28a745;
   color: white;
   text-decoration: none;
   border-radius: 5px;
