@@ -4,12 +4,14 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/patrickmn/go-cache"
 	"io"
 	"log"
 	"net/http"
 	"net/url"
 	"palmsearch/elasticsearch"
 	"strings"
+	"time"
 )
 
 type TokenStore struct {
@@ -66,6 +68,7 @@ type GetListItemResponse struct {
 }
 
 var ts = TokenStore{}
+var c = cache.New(5*time.Minute, 10*time.Minute)
 
 /*
 get access token
@@ -110,11 +113,75 @@ func GetSites(token string) {
 	fmt.Println("Response Status:", resp.Status)
 	fmt.Println("Get Site Response Body:", gsr)
 
-	GetLists(gsr)
+	selectedSites := []string{"palmbook"}
+	filteredSites := filterSites(gsr, selectedSites)
+	GetLists(filteredSites)
+	log.Println("sync complete")
+	cleanUp()
 }
 
-func GetLists(gsr GetSiteResponse) {
-	for idx, val := range gsr.Value {
+func cleanUp() {
+	existDocs := elasticsearch.GetAll()
+
+	items := c.Items()
+	docToBeDeleted := []string{}
+
+	for _, doc := range existDocs {
+		// Check if the doc exists as a key in the cache
+		if item, found := items[doc]; found {
+			fmt.Printf("Found doc in cache: Key: %s, Value: %v\n", doc, item.Object)
+		} else {
+			fmt.Printf("Doc %s not found in cache\n", doc)
+			docToBeDeleted = append(docToBeDeleted, doc)
+		}
+	}
+	elasticsearch.DeleteDocumentsBulk(docToBeDeleted)
+	c.Flush()
+}
+
+func filterSites(gsr GetSiteResponse, arr2 []string) []Site {
+
+	if len(arr2) == 0 {
+		return gsr.Value
+	}
+
+	arr1 := gsr.Value
+	namesMap := make(map[string]struct{})
+	for _, name := range arr2 {
+		namesMap[name] = struct{}{}
+	}
+
+	var result []Site
+	for _, site := range arr1 {
+		if _, exists := namesMap[site.Name]; exists {
+			result = append(result, site)
+		}
+	}
+
+	return result
+}
+
+func filterContentType(gsr GetListItemResponse, arr2 []string) GetListItemResponse {
+	arr1 := gsr.Value
+	namesMap := make(map[string]struct{})
+	for _, name := range arr2 {
+		namesMap[name] = struct{}{}
+	}
+
+	var result []ListItem
+	for _, listItem := range arr1 {
+		if _, exists := namesMap[listItem.ContentType.Name]; exists {
+			result = append(result, listItem)
+		}
+	}
+
+	gsr.Value = result
+
+	return gsr
+}
+
+func GetLists(gsr []Site) {
+	for idx, val := range gsr {
 		fmt.Printf("%v\t%v\n", idx, val)
 		fmt.Printf("Processing %v", val.Name)
 		req, err := http.NewRequest("GET", fmt.Sprintf("https://graph.microsoft.com/v1.0/sites/%v/lists", val.Id), nil)
@@ -151,6 +218,7 @@ func GetLists(gsr GetSiteResponse) {
 }
 
 func GetListItems(glr GetListResponse) {
+
 	for _, val := range glr.Value {
 		fmt.Printf("Processing List Item %v", val.Name)
 		req, err := http.NewRequest("GET", fmt.Sprintf("https://graph.microsoft.com/v1.0/sites/%v/lists/%v/items?$select=contentType,lastModifiedDateTime,id,webUrl,createdDateTime,lastModifiedBy&$expand=fields($select=FileLeafRef)", glr.SiteId, val.Id), nil)
@@ -186,13 +254,16 @@ func GetListItems(glr GetListResponse) {
 		glir.SiteId = glr.SiteId
 		glir.SiteName = glr.SiteName
 
-		for _, glirval := range glir.Value {
-			glirval.Name = glirval.Fields.Name
+		for i := range glir.Value {
+			glir.Value[i].Name = glir.Value[i].Fields.Name
 		}
 
 		log.Printf("glir: %v", glir.Value)
 
-		buf := getElasticBuf(glir)
+		selectedContentType := []string{"Document"}
+
+		filteredListItems := filterContentType(glir, selectedContentType)
+		buf := getElasticBuf(filteredListItems)
 		elasticsearch.BulkInsert(esclient, buf)
 	}
 
@@ -238,9 +309,13 @@ func GetTenantAccessToken(tenantId string) {
 }
 
 func getElasticBuf(data GetListItemResponse) bytes.Buffer {
+
 	var buf bytes.Buffer
 	for _, doc := range data.Value {
-		meta := []byte(fmt.Sprintf(`{ "index" : { "_index" : "golang-bulk-index3", "_id" : "%d" } }%s`, data.SiteName+"_"+data.ListId+"_"+doc.Id, "\n"))
+		id := data.SiteName + "_" + data.ListId + "_" + doc.Id
+		c.Set(id, "golang-bulk-index3", cache.DefaultExpiration)
+
+		meta := []byte(fmt.Sprintf(`{ "index" : { "_index" : "golang-bulk-index3", "_id" : "%v" } }%s`, id, "\n"))
 		d, err := json.Marshal(doc)
 		if err != nil {
 			log.Fatalf("Cannot encode document %d: %s", doc.Id, err)

@@ -1,4 +1,4 @@
-﻿package main
+package main
 
 import (
 	"fmt"
@@ -6,6 +6,7 @@ import (
 	"github.com/rs/cors"
 	"log"
 	"net/http"
+	"palmsearch/elasticsearch"
 	"palmsearch/sharepoint"
 )
 
@@ -20,6 +21,7 @@ func main() {
 	})
 	handler := c.Handler(r)
 	r.Handle("/sync", http.HandlerFunc(sync)).Methods("POST")
+	r.Handle("/getAll", http.HandlerFunc(getAll)).Methods("GET")
 
 	fmt.Println("execution done")
 	if err := http.ListenAndServe(":5555", handler); err != nil {
@@ -32,4 +34,10 @@ func sync(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("execution sync")
 
 	sharepoint.IndexSharepoint()
+}
+
+func getAll(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("execution sync")
+
+	elasticsearch.GetAll()
 }
