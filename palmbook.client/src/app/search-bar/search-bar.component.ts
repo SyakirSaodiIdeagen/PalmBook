@@ -1,4 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { MsalService } from '@azure/msal-angular';
+import { AuthenticationResult } from '@azure/msal-browser';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -11,9 +15,21 @@ export class SearchBarComponent {
   results: { name: string; type: string; source: string; downloadUrl: string }[] = [];
   loading = false;
   searched = false;
+  loggedIn = false;
 
   @ViewChild('topElement') topElement!: ElementRef;
 
+  constructor(private authService: AuthService, private router: Router) { }
+  ngOnInit() {
+    // Check if the user is logged in and update the loggedIn status
+    var user = this.authService.getUserDetails();
+    console.log(user);
+    this.loggedIn = !!this.authService.getUserDetails();
+
+    if (!this.loggedIn) {
+      // Redirect to login if not logged in
+      this.router.navigate(['/login']);
+    }  }
   search() {
     if (!this.query.trim()) return;
 
@@ -38,5 +54,9 @@ export class SearchBarComponent {
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  logout() {
+    this.authService.microsoftLogout();
   }
 }

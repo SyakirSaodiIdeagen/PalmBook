@@ -113,3 +113,24 @@
     padding: 4px 8px;
   }
 }
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+}
+
+.logout-btn {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+  .logout-btn:hover {
+    background-color: #c9302c;
+  }

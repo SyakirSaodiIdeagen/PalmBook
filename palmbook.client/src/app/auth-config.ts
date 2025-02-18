@@ -1,17 +1,21 @@
 // src/app/auth-config.ts
 import { Configuration, InteractionType, LogLevel } from '@azure/msal-browser';
 import { MsalGuardConfiguration, MsalInterceptorConfiguration} from '@azure/msal-angular';
+const isIE =
+  window.navigator.userAgent.indexOf("MSIE ") > -1 ||
+  window.navigator.userAgent.indexOf("Trident/") > -1;
 
 export const msalConfig: Configuration = {
   auth: {
-    clientId: '1f7ce7f6-ac7c-43f5-889a-50960ebc58c7', // Application (client) ID from Azure AD
+    clientId: '9c8fe54a-9175-4126-a544-12e5be67761b',
     authority: 'https://login.microsoftonline.com/3192a717-1c36-4a32-b40f-d91972b86f32', // Directory (tenant) ID
     redirectUri: 'https://localhost:53482/', // Your application's redirect URI
   },
   cache: {
-    cacheLocation: 'localStorage', // This configures where your cache will be stored
-    storeAuthStateInCookie: false, // Set this to true if you are having issues on IE11 or Edge
+    cacheLocation: "localStorage",
+    storeAuthStateInCookie: isIE,
   },
+
   system: {
     loggerOptions: {
       loggerCallback: (level, message, containsPii) => {
