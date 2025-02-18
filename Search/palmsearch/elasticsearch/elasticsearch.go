@@ -2,17 +2,20 @@ package elasticsearch
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/elastic/go-elasticsearch/v8"
+	"github.com/elastic/go-elasticsearch/v8/esapi"
 	"log"
+	"net/http"
 )
 
 func GetEsClient() *elasticsearch.Client {
 
 	cfg := elasticsearch.Config{
 		Addresses: []string{
-			"http://elasticsearch:9200",
+			"http://localhost:9200",
 		},
 		Username: "elastic",
 		Password: "password1!",
@@ -55,5 +58,92 @@ func BulkInsert(es *elasticsearch.Client, buf bytes.Buffer) {
 		}
 	} else {
 		fmt.Println("Bulk insert successful!")
+	}
+}
+
+func GetAll() []string {
+	client := GetEsClient()
+
+	searchQuery := `{
+		"_source": false, 
+		"fields": ["_id"],
+		"query": {
+			"match_all": {}
+		}
+	}`
+
+	req := esapi.SearchRequest{
+		Body:  bytes.NewReader([]byte(searchQuery)),
+		Index: []string{"golang-bulk-index3"},
+	}
+
+	res, err := req.Do(context.Background(), client)
+	if err != nil {
+		log.Fatalf("Error executing the search request: %s", err)
+	}
+	defer res.Body.Close()
+	if res.StatusCode == http.StatusNotFound {
+		log.Println("Not Found")
+		return nil
+	}
+	var result map[string]interface{}
+	if err := json.NewDecoder(res.Body).Decode(&result); err != nil {
+		log.Fatalf("Error parsing the search response: %s", err)
+	}
+	alldocuments := []string{}
+
+	hits := result["hits"].(map[string]interface{})["hits"].([]interface{})
+	for _, hit := range hits {
+		doc := hit.(map[string]interface{})
+		id := doc["_id"].(string)
+		alldocuments = append(alldocuments, id)
+		fmt.Println("Document ID:", id)
+	}
+
+	return alldocuments
+}
+
+type BulkDeleteRequest struct {
+	Delete struct {
+		Index string `json:"_index"`
+		ID    string `json:"_id"`
+	} `json:"delete"`
+}
+
+func DeleteDocumentsBulk(ids []string) {
+	es, err := elasticsearch.NewClient(elasticsearch.Config{
+		Addresses: []string{"http://localhost:9200"},
+	})
+	if err != nil {
+		log.Fatalf("Error creating Elasticsearch client: %s", err)
+	}
+
+	var buf bytes.Buffer
+
+	for _, id := range ids {
+		req := BulkDeleteRequest{
+			Delete: struct {
+				Index string `json:"_index"`
+				ID    string `json:"_id"`
+			}{
+				Index: "golang-bulk-index3",
+				ID:    id,
+			},
+		}
+		if err := json.NewEncoder(&buf).Encode(req); err != nil {
+			log.Fatalf("Error encoding bulk delete request: %s", err)
+		}
+	}
+
+	res, err := es.Bulk(&buf)
+	if err != nil {
+		log.Fatalf("Error executing bulk delete: %s", err)
+	}
+	defer res.Body.Close()
+
+	if res.IsError() {
+		log.Printf("Error deleting documents: %s", res.String())
+	} else {
+		fmt.Println("Successfully deleted documents")
 	}
 }
