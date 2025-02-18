@@ -39,13 +39,13 @@ import { AuthGuard } from './auth.guard';
     MsalModule.forRoot(
       new PublicClientApplication(msalConfig),
         {
-            interactionType: InteractionType.Redirect, // Msal Guard Configuration
+            interactionType: InteractionType.Popup, // Msal Guard Configuration
             authRequest: {
                 scopes: ["user.read"],
             },
         },
         {
-            interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
+            interactionType: InteractionType.Popup, // MSAL Interceptor Configuration
             protectedResourceMap: new Map([
                 ["https://graph.microsoft.com/v1.0/me", ["user.read"]]
             ]),

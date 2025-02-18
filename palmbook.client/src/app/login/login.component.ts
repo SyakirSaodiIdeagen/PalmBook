@@ -12,17 +12,18 @@ import { AuthService } from '../services/auth/auth.service';
 export class LoginComponent {
   constructor(private msalService: MsalService, private authService: AuthService, private router: Router) { }
   ngOnInit(): void {
-    const accounts = this.msalService.instance.getAllAccounts();
-    if (accounts.length > 0) {
-      // Redirect if already logged in
-      this.router.navigate(['/search-bar']);
-    }
   }
 
   // Initiates Microsoft login using redirect
   login() {
-    this.authService.microsoftLogin(); // Call the microsoftLogin() method from the AuthService
-
+    const accounts = this.msalService.instance.getAllAccounts();
+    if (accounts.length > 0) {
+      // Redirect to search-bar if already logged in
+      this.router.navigate(['/search-bar']);
+    } else {
+      // Proceed with Microsoft login if not logged in
+      this.authService.microsoftLogin();
+    }
   }
 
   redirect() {

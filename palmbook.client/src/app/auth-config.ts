@@ -42,7 +42,7 @@ export const msalConfig: Configuration = {
 };
 
 export const msalGuardConfig: MsalGuardConfiguration = {
-  interactionType: InteractionType.Redirect,
+  interactionType: InteractionType.Popup,
   authRequest: {
     scopes: ['user.read'],
   },

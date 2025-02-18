@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { MSAL_GUARD_CONFIG, MsalGuardConfiguration, MsalService } from '@azure/msal-angular';
-import { RedirectRequest } from '@azure/msal-browser';
+import { AuthenticationResult, PopupRequest, RedirectRequest } from '@azure/msal-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +17,15 @@ export class AuthService {
 
   microsoftLogin() {
     if (this.msalGuardConfig.authRequest) {
-      this.msalService.loginRedirect({ ...this.msalGuardConfig.authRequest } as RedirectRequest);
+      this.msalService.loginPopup({ ...this.msalGuardConfig.authRequest } as PopupRequest)
+        .subscribe((response: AuthenticationResult) => {
+          this.msalService.instance.setActiveAccount(response.account);
+        });
     } else {
-      this.msalService.loginRedirect();
+      this.msalService.loginPopup()
+        .subscribe((response: AuthenticationResult) => {
+          this.msalService.instance.setActiveAccount(response.account);
+        });
     }
   }
 

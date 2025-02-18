@@ -11,26 +11,17 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '', // Default route redirects to search-bar
+    redirectTo: 'search-bar', // Default route redirects to search-bar
   },
   {
-    path: '',
+    path: 'search-bar',
     component: SearchBarComponent,
     canActivate: [MsalGuard], // Protect search-bar with MSAL Guard
   },
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [MsalGuard], // Protect login page from logged-in users
-    data: {
-      // Custom data to redirect users if they're logged in
-      msalGuardConfig: {
-        interactionType: InteractionType.Redirect,
-        authRequest: {
-          scopes: ['user.read'],
-        },
-      },
-    },
+    canActivate: [AuthGuard], // Protect login page from logged-in users
   },
 ];
 
