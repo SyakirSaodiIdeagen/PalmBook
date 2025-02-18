@@ -11,6 +11,13 @@ import (
 	"net/http"
 )
 
+type BulkDeleteRequest struct {
+	Delete struct {
+		Index string `json:"_index"`
+		ID    string `json:"_id"`
+	} `json:"delete"`
+}
+
 func GetEsClient() *elasticsearch.Client {
 
 	cfg := elasticsearch.Config{
@@ -101,13 +108,6 @@ func GetAll() []string {
 	}
 
 	return alldocuments
-}
-
-type BulkDeleteRequest struct {
-	Delete struct {
-		Index string `json:"_index"`
-		ID    string `json:"_id"`
-	} `json:"delete"`
 }
 
 func DeleteDocumentsBulk(ids []string) {
