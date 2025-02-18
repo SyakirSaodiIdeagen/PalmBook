@@ -120,6 +120,10 @@ func DeleteDocumentsBulk(ids []string) {
 
 	var buf bytes.Buffer
 
+	if len(ids) == 0 {
+		return
+	}
+
 	for _, id := range ids {
 		req := BulkDeleteRequest{
 			Delete: struct {

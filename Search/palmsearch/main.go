@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
@@ -22,6 +23,7 @@ func main() {
 	handler := c.Handler(r)
 	r.Handle("/sync", http.HandlerFunc(sync)).Methods("POST")
 	r.Handle("/getAll", http.HandlerFunc(getAll)).Methods("GET")
+	r.Handle("/search", http.HandlerFunc(search)).Methods("GET")
 
 	fmt.Println("execution done")
 	if err := http.ListenAndServe(":5555", handler); err != nil {
@@ -40,4 +42,21 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("execution sync")
 
 	elasticsearch.GetAll()
+}
+
+func search(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("execution sync")
+	queryParam := r.URL.Query().Get("query")
+	searchHits := elasticsearch.Search(queryParam)
+
+	responseData, err := json.Marshal(searchHits)
+	if err != nil {
+		http.Error(w, "Error marshaling response", http.StatusInternalServerError)
+		return
+	}
+
+	_, err = w.Write(responseData)
+	if err != nil {
+		return
+	}
 }

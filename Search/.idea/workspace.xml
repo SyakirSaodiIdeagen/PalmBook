@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df2836e1-119a-4dd5-9445-f99692954a6f" name="Changes" comment=".." />
+    <list default="true" id="df2836e1-119a-4dd5-9445-f99692954a6f" name="Changes" comment="..">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/palmsearch/elasticsearch/elasticsearch.go" beforeDir="false" afterPath="$PROJECT_DIR$/palmsearch/elasticsearch/elasticsearch.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/palmsearch/elasticsearch/query.go" beforeDir="false" afterPath="$PROJECT_DIR$/palmsearch/elasticsearch/query.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/palmsearch/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/palmsearch/main.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -126,18 +131,23 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/palmsearch/elasticsearch/elasticsearch.go</url>
-          <line>137</line>
+          <line>141</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/palmsearch/elasticsearch/elasticsearch.go</url>
-          <line>138</line>
+          <line>142</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/palmsearch/elasticsearch/elasticsearch.go</url>
-          <line>140</line>
+          <line>144</line>
           <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/palmsearch/elasticsearch/elasticsearch.go</url>
+          <line>126</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
