@@ -22,7 +22,7 @@ export class AppComponent {
       .subscribe((result: EventMessage) => {
         if (this.msalService.instance.getAllAccounts().length === 0) {
           // Redirect to Login page
-          this.route.navigate(['/login']);
+          //this.route.navigate(['/login']);
         } else {
           this.setLoginDisplay();
         }
@@ -49,7 +49,7 @@ export class AppComponent {
     } else {
       console.log("Not logged-in");
       // Redirect to Login page
-      this.route.navigate(['/login']);
+      //this.route.navigate(['/login']);
     }
 
   }
