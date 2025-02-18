@@ -1,0 +1,20 @@
+
+
+Syakir
+1. login
+	- search bar
+	- open in new tab or dialog
+
+Zaim
+2.performance testing
+	- provide dataset and proves it is fassst
+
+Farhan
+datasource sharepoint
+1. Add datasource
+	- googledrive or
+	- dropbox
+
+
+optional
+	- add search suggestion (maybe ai)
