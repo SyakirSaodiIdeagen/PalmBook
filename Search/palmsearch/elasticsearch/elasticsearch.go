@@ -10,33 +10,12 @@ import (
 
 func GetEsClient() *elasticsearch.Client {
 
-	//caCert, err := os.ReadFile("./elasticsearch/http_ca.crt") // Replace with your .crt file
-	//if err != nil {
-	//	log.Fatalf("Error reading CA certificate: %s", err)
-	//}
-	//
-	//// Create a CA certificate pool and add the CA certificate
-	//caCertPool := x509.NewCertPool()
-	//if ok := caCertPool.AppendCertsFromPEM(caCert); !ok {
-	//	log.Fatalf("Failed to append CA certificate to pool")
-	//}
-
-	// TLS configuration
-	//tlsConfig := &tls.Config{
-	//	RootCAs:    caCertPool, // Trust Elasticsearch's certificate
-	//	MinVersion: tls.VersionTLS12,
-	//}
-
-	// Elasticsearch client configuration
 	cfg := elasticsearch.Config{
 		Addresses: []string{
-			"http://elasticsearch:9200", // Ensure HTTPS
+			"http://elasticsearch:9200",
 		},
-		Username: "elastic",    // Optional: Basic auth if enabled
-		Password: "password1!", // Optional: Basic auth if enabled
-		//Transport: &http.Transport{
-		//	TLSClientConfig: tlsConfig,
-		//},
+		Username: "elastic",
+		Password: "password1!",
 	}
 
 	es, err := elasticsearch.NewClient(cfg)
@@ -45,33 +24,9 @@ func GetEsClient() *elasticsearch.Client {
 	}
 
 	return es
-	// Call bulk insertion
 }
 
 func BulkInsert(es *elasticsearch.Client, buf bytes.Buffer) {
-	//docs := []map[string]interface{}{
-	//	{"id": 1, "user": "alice", "message": "First message", "timestamp": "2025-02-02"},
-	//	{"id": 2, "user": "bob", "message": "Second message", "timestamp": "2025-02-03"},
-	//	{"id": 3, "user": "carol", "message": "Third message", "timestamp": "2025-02-04"},
-	//}
-	//
-	//var buf bytes.Buffer
-	//
-	//for _, doc := range data.Value {
-	//	// Action metadata (index operation)
-	//	meta := []byte(fmt.Sprintf(`{ "index" : { "_index" : "golang-bulk-index", "_id" : "%d" } }%s`, doc.Id, "\n"))
-	//	// Document body
-	//	data, err := json.Marshal(doc)
-	//	if err != nil {
-	//		log.Fatalf("Cannot encode document %d: %s", doc.Id, err)
-	//	}
-	//
-	//	buf.Grow(len(meta) + len(data) + 1)
-	//	buf.Write(meta)
-	//	buf.Write(data)
-	//	buf.WriteByte('\n')
-	//}
-
 	if buf.Len() <= 0 {
 		return
 	}

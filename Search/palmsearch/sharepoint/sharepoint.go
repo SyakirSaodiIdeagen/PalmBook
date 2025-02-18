@@ -37,6 +37,7 @@ type ListItem struct {
 	Fields         Fields      `json:"fields,omitempty"`
 	ContentType    ContentType `json:"contentType,omitempty"`
 	Id             string      `json:"id,omitempty"`
+	Name           string      `json:"Name,omitempty"`
 }
 
 type Fields struct {
@@ -184,6 +185,13 @@ func GetListItems(glr GetListResponse) {
 		glir.ListId = val.Id
 		glir.SiteId = glr.SiteId
 		glir.SiteName = glr.SiteName
+
+		for _, glirval := range glir.Value {
+			glirval.Name = glirval.Fields.Name
+		}
+
+		log.Printf("glir: %v", glir.Value)
+
 		buf := getElasticBuf(glir)
 		elasticsearch.BulkInsert(esclient, buf)
 	}
