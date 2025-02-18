@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-browser';
 import { AuthService } from '../services/auth/auth.service';
+import {SearchService} from "./search.service";
 
 @Component({
   selector: 'app-search-bar',
@@ -19,17 +20,19 @@ export class SearchBarComponent {
 
   @ViewChild('topElement') topElement!: ElementRef;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router,
+              private _searchService: SearchService) { }
   ngOnInit() {
-    // Check if the user is logged in and update the loggedIn status
-    var user = this.authService.getUserDetails();
-    console.log(user);
-    this.loggedIn = !!this.authService.getUserDetails();
-
-    if (!this.loggedIn) {
-      // Redirect to login if not logged in
-      this.router.navigate(['/login']);
-    }  }
+    // // Check if the user is logged in and update the loggedIn status
+    // var user = this.authService.getUserDetails();
+    // console.log(user);
+    // this.loggedIn = !!this.authService.getUserDetails();
+    //
+    // if (!this.loggedIn) {
+    //   // Redirect to login if not logged in
+    //   this.router.navigate(['/login']);
+    // }  
+  }
   search() {
     if (!this.query.trim()) return;
 
@@ -37,19 +40,23 @@ export class SearchBarComponent {
     this.results = [];
     this.searched = true;
 
-    setTimeout(() => {
-      this.loading = false;
-      this.results =
-        this.query.toLowerCase() === 'test'
-          ? [
-            { name: 'Report.pdf', type: 'PDF', source: 'SharePoint', downloadUrl: '#' },
-            { name: 'Data.xlsx', type: 'Excel', source: 'Teams', downloadUrl: '#' },
-            { name: 'Presentation.pptx', type: 'PowerPoint', source: 'OneDrive', downloadUrl: '#' }
-          ]
-          : [];
+    this._searchService.search(this.query).subscribe(result => {
+      console.log('resultsss',result);
+    })
 
-      this.scrollToTop();
-    }, 1500);
+    // setTimeout(() => {
+    //   this.loading = false;
+    //   this.results =
+    //     this.query.toLowerCase() === 'test'
+    //       ? [
+    //         { name: 'Report.pdf', type: 'PDF', source: 'SharePoint', downloadUrl: '#' },
+    //         { name: 'Data.xlsx', type: 'Excel', source: 'Teams', downloadUrl: '#' },
+    //         { name: 'Presentation.pptx', type: 'PowerPoint', source: 'OneDrive', downloadUrl: '#' }
+    //       ]
+    //       : [];
+    //
+    //   this.scrollToTop();
+    // }, 1500);
   }
 
   scrollToTop() {
