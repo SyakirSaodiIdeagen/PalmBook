@@ -47,6 +47,7 @@ export class SearchBarComponent {
     this.searched = true;
 
     this._searchService.search(this.query).subscribe(result => {
+      console.log(result, "Result");
       this.dataSource.data = result;
       this.loading = false;
 

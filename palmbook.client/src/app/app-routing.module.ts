@@ -21,7 +21,6 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [AuthGuard], // Protect login page from logged-in users
   },
 ];
 
