@@ -5,7 +5,7 @@
 <!-- Search Box -->
 <div class="search-container" [ngClass]="{'search-top': searched}">
   <div class="search-bar">
-    <input type="text" matInput [(ngModel)]="query" placeholder="Search" (keyup.enter)="search()">
+    <input type="text" (input)="onSearchInput()"  [(ngModel)]="query" placeholder="Search..." />
   </div>
 </div>
 
@@ -37,7 +37,9 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef> Action </th>
           <td mat-cell *matCellDef="let file">
-            <a mat-button color="accent" [href]="file.webUrl" download>Download</a>
+            <a mat-button color="accent" [href]="file.webUrl" target="_blank" rel="noopener noreferrer" download>
+              Open
+            </a>
           </td>
         </ng-container>
 
