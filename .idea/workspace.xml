@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6104eef8-2813-4d13-9fed-3a17318a4e4f" name="Changes" comment="add dynamic config">
+    <list default="true" id="6104eef8-2813-4d13-9fed-3a17318a4e4f" name="Changes" comment="run sync on init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Search/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Search/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Search/palmsearch/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Search/palmsearch/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go" beforeDir="false" afterPath="$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/palmbook.client/src/app/search-bar/search-bar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/palmbook.client/src/app/search-bar/search-bar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/palmbook.client/src/app/search-bar/search.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/palmbook.client/src/app/search-bar/search.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +113,8 @@
     <MESSAGE value="...." />
     <MESSAGE value="fix drive model" />
     <MESSAGE value="add dynamic config" />
-    <option name="LAST_COMMIT_MESSAGE" value="add dynamic config" />
+    <MESSAGE value="run sync on init" />
+    <option name="LAST_COMMIT_MESSAGE" value="run sync on init" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
@@ -166,6 +171,16 @@
           <url>file://$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go</url>
           <line>293</line>
           <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/Search/palmsearch/main.go</url>
+          <line>67</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/Search/palmsearch/main.go</url>
+          <line>75</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -28,6 +28,7 @@
       - ./palmsearch/sharepointconf:/sharepointconf
     environment:
       - ELASTICSEARCH_HOST=http://elasticsearch:9200
+      - TENANT_NAME=destinylink.onmicrosoft.com
     depends_on:
       elasticsearch:
         condition: service_healthy
