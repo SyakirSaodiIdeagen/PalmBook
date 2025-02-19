@@ -28,7 +28,7 @@ func IndexGoogleDrive() {
 	var filesData []DriveFile
 	ctx := context.Background()
 
-	jsonKey, err := os.ReadFile("googledrive/gd2.json")
+	jsonKey, err := os.ReadFile("/gdconf/gd2.json")
 	if err != nil {
 		log.Fatalf("Failed to read JSON key file: %v", err)
 	}

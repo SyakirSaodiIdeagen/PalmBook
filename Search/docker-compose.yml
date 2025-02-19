@@ -23,6 +23,8 @@
   palmsearch:
     build:
       context: ./palmsearch
+    volumes:
+      - ./gdconf:/gdconf
     environment:
       - ELASTICSEARCH_HOST=http://elasticsearch:9200
     depends_on:

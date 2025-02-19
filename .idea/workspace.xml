@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6104eef8-2813-4d13-9fed-3a17318a4e4f" name="Changes" comment="fix drive model">
-      <change beforePath="$PROJECT_DIR$/palmbook.client/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/palmbook.client/src/app/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Search/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Search/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Search/palmsearch/elasticsearch/elasticsearch.go" beforeDir="false" afterPath="$PROJECT_DIR$/Search/palmsearch/elasticsearch/elasticsearch.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Search/palmsearch/googledrive/googledrive.go" beforeDir="false" afterPath="$PROJECT_DIR$/Search/palmsearch/googledrive/googledrive.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/palmbook.client/src/app/auth-config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/palmbook.client/src/app/auth-config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +54,8 @@
     "last_opened_file_path": "C:/Workspace/hackaton3/PalmBook/palmbook.client/src/app/search-bar",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm"
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Workspace\\hackaton3\\PalmBook\\palmbook.client\\node_modules\\typescript\\lib"
   }
 }]]></component>
   <component name="RecentsManager">
