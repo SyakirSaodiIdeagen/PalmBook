@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6104eef8-2813-4d13-9fed-3a17318a4e4f" name="Changes" comment="fix drive model">
-      <change afterPath="$PROJECT_DIR$/Search/palmsearch/sharepointconf/sharepointconf.json" afterDir="false" />
+    <list default="true" id="6104eef8-2813-4d13-9fed-3a17318a4e4f" name="Changes" comment="add dynamic config">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Search/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Search/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Search/gdconf/gd2.json" beforeDir="false" afterPath="$PROJECT_DIR$/Search/palmsearch/gdconf/gd2.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go" beforeDir="false" afterPath="$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Search/palmsearch/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Search/palmsearch/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +108,8 @@
     <MESSAGE value=".." />
     <MESSAGE value="...." />
     <MESSAGE value="fix drive model" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix drive model" />
+    <MESSAGE value="add dynamic config" />
+    <option name="LAST_COMMIT_MESSAGE" value="add dynamic config" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

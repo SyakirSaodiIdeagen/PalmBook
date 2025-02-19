@@ -26,16 +26,23 @@ func main() {
 	r.Handle("/getAll", http.HandlerFunc(getAll)).Methods("GET")
 	r.Handle("/search", http.HandlerFunc(search)).Methods("GET")
 	r.Handle("/googledrive", http.HandlerFunc(runGd)).Methods("GET")
+	syncInit()
 
-	fmt.Println("execution done")
 	if err := http.ListenAndServe(":5555", handler); err != nil {
 		log.Fatalf("Could not start server: %s\n", err.Error())
 	}
 
 }
 
+func syncInit() {
+	fmt.Println("sync executed")
+	googledrive.IndexGoogleDrive()
+	sharepoint.IndexSharepoint()
+	fmt.Println("sync completed")
+
+}
+
 func sync(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("execution sync")
 	googledrive.IndexGoogleDrive()
 	sharepoint.IndexSharepoint()
 }
