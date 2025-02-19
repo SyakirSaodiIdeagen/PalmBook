@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-browser';
@@ -7,6 +7,7 @@ import {SearchService} from "./search.service";
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Subject, catchError, debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-search-bar',
@@ -14,7 +15,7 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.css'
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements AfterViewInit {
   query: string = '';
   results: { name: string; type: string; source: string; downloadUrl: string }[] = [];
   loading = false;
@@ -22,6 +23,7 @@ export class SearchBarComponent {
   loggedIn = false;
   dataSource = new MatTableDataSource([]);
   displayedColumns: string[] = ['name', 'type', 'source', 'action'];
+  private searchSubject = new Subject<string>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -29,62 +31,51 @@ export class SearchBarComponent {
   constructor(private authService: AuthService, private router: Router,
               private _searchService: SearchService) { }
   ngOnInit() {
-    // // Check if the user is logged in and update the loggedIn status
-     var user = this.authService.getUserDetails();
-     console.log(user);
-     this.loggedIn = !!this.authService.getUserDetails();
-    
-     if (!this.loggedIn) {
-       // Redirect to login if not logged in
-       this.router.navigate(['/login']);
-     }  
+    const user = this.authService.getUserDetails();
+    console.log(user);
+    this.loggedIn = !!user;
+
+    if (!this.loggedIn) {
+      this.router.navigate(['/login']);
+    }
+
+    this.searchSubject
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap(query => {
+          if (!query.trim()) {
+            this.loading = false;
+            this.searched = false;
+            return of([]); // ✅ Fix: Return an observable
+          }
+          this.loading = true;
+          this.searched = true;
+          return this._searchService.search(query).pipe(
+            catchError(() => {
+              this.loading = false;
+              return of([]); // ✅ Handle API error
+            })
+          );
+        })
+      )
+      .subscribe(result => {
+        console.log(result, "Result");
+        this.results = result;
+        this.dataSource.data = result;
+        this.loading = false;
+
+        setTimeout(() => this.scrollToTop(), 0);
+      });
   }
-  search() {
-    if (!this.query.trim()) return;
 
-    this.loading = true;
-    this.dataSource.data = [];
-    this.searched = true;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
-    this._searchService.search(this.query).subscribe(result => {
-      console.log(result, "Result");
-      this.results = result;
-
-      this.dataSource.data = result;
-      this.loading = false;
-
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-
-      // Move search box to the top of the page
-      setTimeout(() => this.scrollToTop(), 0);
-    }, () => {
-      this.loading = false;
-    });
-
-    //if (!this.query.trim()) return;
-
-    //this.loading = true;
-    //this.results = [];
-    //this.searched = true;
-
-    //this._searchService.search(this.query).subscribe(result => {
-    //  console.log('resultsss',result);
-    //})
-
-    // setTimeout(() => {
-    //   this.loading = false;
-    //   this.results =
-    //     this.query.toLowerCase() === 'test'
-    //       ? [
-    //         { name: 'Report.pdf', type: 'PDF', source: 'SharePoint', downloadUrl: '#' },
-    //         { name: 'Data.xlsx', type: 'Excel', source: 'Teams', downloadUrl: '#' },
-    //         { name: 'Presentation.pptx', type: 'PowerPoint', source: 'OneDrive', downloadUrl: '#' }
-    //       ]
-    //       : [];
-    //
-    //   this.scrollToTop();
-    // }, 1500);
+  onSearchInput() {
+    this.searchSubject.next(this.query);
   }
 
   scrollToTop() {

@@ -9,7 +9,7 @@ export const msalConfig: Configuration = {
   auth: {
     clientId: '9c8fe54a-9175-4126-a544-12e5be67761b',
     authority: 'https://login.microsoftonline.com/3192a717-1c36-4a32-b40f-d91972b86f32', // Directory (tenant) ID
-    redirectUri: 'https://localhost:4200/', // Your application's redirect URI
+    redirectUri: 'https://localhost:53482/', // Your application's redirect URI
   },
   cache: {
     cacheLocation: "localStorage",
