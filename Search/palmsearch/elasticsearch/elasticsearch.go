@@ -22,8 +22,8 @@ func GetEsClient() *elasticsearch.Client {
 
 	cfg := elasticsearch.Config{
 		Addresses: []string{
-			//"http://localhost:9200",     //local
-			"http://elasticsearch:9200", //docker
+			"http://localhost:9200", //local
+			//"http://elasticsearch:9200", //docker
 		},
 		Username: "elastic",
 		Password: "password1!",

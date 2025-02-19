@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"palmsearch/elasticsearch"
+	"palmsearch/googledrive"
 	"palmsearch/sharepoint"
 )
 
@@ -24,6 +25,7 @@ func main() {
 	r.Handle("/sync", http.HandlerFunc(sync)).Methods("POST")
 	r.Handle("/getAll", http.HandlerFunc(getAll)).Methods("GET")
 	r.Handle("/search", http.HandlerFunc(search)).Methods("GET")
+	r.Handle("/googledrive", http.HandlerFunc(runGd)).Methods("GET")
 
 	fmt.Println("execution done")
 	if err := http.ListenAndServe(":5555", handler); err != nil {
@@ -34,7 +36,7 @@ func main() {
 
 func sync(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("execution sync")
-
+	googledrive.IndexGoogleDrive()
 	sharepoint.IndexSharepoint()
 }
 
@@ -42,6 +44,12 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("execution sync")
 
 	elasticsearch.GetAll()
+}
+
+func runGd(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("execution sync")
+
+	googledrive.IndexGoogleDrive()
 }
 
 func search(w http.ResponseWriter, r *http.Request) {
