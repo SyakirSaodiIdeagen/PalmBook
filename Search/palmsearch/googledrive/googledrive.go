@@ -15,10 +15,10 @@ import (
 )
 
 type DriveFile struct {
-	ID             string `id:"source,omitempty"`
-	Name           string `name:"source,omitempty"`
-	WebUrl         string `webUrl:"source,omitempty"`
-	DownloadLink   string `downloadLink:"source,omitempty"`
+	ID             string `json:"id,omitempty"`
+	Name           string `json:"Name,omitempty"`
+	WebUrl         string `json:"webUrl,omitempty"`
+	DownloadLink   string `json:"downloadLink,omitempty"`
 	Source         string `json:"source,omitempty"`
 	CreatedAt      string `json:"createdDateTime,omitempty"`
 	LastModifiedAt string `json:"lastModifiedDateTime,omitempty"`
