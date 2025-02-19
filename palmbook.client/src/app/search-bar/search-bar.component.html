@@ -1,44 +1,50 @@
 <div class="top-bar">
-  <button class="logout-btn" (click)="logout()">Logout</button>
+  <button mat-button color="primary" class="logout-btn" (click)="logout()">Logout</button>
 </div>
-<div class="search-container">
-  <div class="search-box">
-    <input [(ngModel)]="query"
-           (keyup.enter)="search()"
-           type="text"
-           class="search-input"
-           placeholder="Search files..." />
-  </div>
 
-  <!-- Loading Indicator -->
-  <div class="loading" *ngIf="loading">Searching...</div>
+<!-- Search Box (Positioned at the top when searching) -->
+<div class="search-container" [ngClass]="{'fixed-search': searched}">
+  <mat-form-field appearance="outline" class="search-box">
+    <mat-label>Search files...</mat-label>
+    <input matInput [(ngModel)]="query" (keyup.enter)="search()" />
+  </mat-form-field>
+</div>
+<!-- Loading Indicator -->
+<div class="loading" *ngIf="loading">Searching...</div>
 
-  <!-- No Results Message (Centered) -->
-  <div class="no-results" *ngIf="!loading && searched && results.length === 0">
-    No files found.
-  </div>
+<!-- No Results Message -->
+<div class="no-results" *ngIf="!loading && searched && results.length === 0">
+  No files found.
+</div>
 
-  <!-- Search Results Table -->
-  <div class="results-container" *ngIf="!loading && results.length > 0">
-    <table class="results-table">
-      <thead>
-        <tr>
-          <th>File Name</th>
-          <th>File Type</th>
-          <th>Source</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let file of results">
-          <td>{{ file.name }}</td>
-          <td>{{ file.type }}</td>
-          <td>{{ file.source }}</td>
-          <td>
-            <a [href]="file.downloadUrl" class="download-btn" download>Download</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<!-- Search Results Table -->
+<div class="results-container" *ngIf="!loading && results.length > 0">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>File Name</th>
+      <td mat-cell *matCellDef="let file">{{ file.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>File Type</th>
+      <td mat-cell *matCellDef="let file">{{ file.type }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="source">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Source</th>
+      <td mat-cell *matCellDef="let file">{{ file.source }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let file">
+        <a mat-button color="accent" [href]="file.downloadUrl" download>Download</a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25]" aria-label="Select page size"></mat-paginator>
 </div>

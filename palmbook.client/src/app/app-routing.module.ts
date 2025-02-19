@@ -11,12 +11,12 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'search-bar', // Default route redirects to search-bar
+    redirectTo: 'login', // Default route redirects to search-bar
   },
   {
     path: 'search-bar',
     component: SearchBarComponent,
-    //canActivate: [MsalGuard], // Protect search-bar with MSAL Guard
+    canActivate: [MsalGuard], // Protect search-bar with MSAL Guard
   },
   {
     path: 'login',

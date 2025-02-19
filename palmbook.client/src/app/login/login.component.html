@@ -1,10 +1,15 @@
-<!-- login.component.html -->
-<div class="login-container">
-  <h2>Please Sign In</h2>
-  <button (click)="login()">Login with Microsoft</button>
-</div>
-<div class="login-container">
-  <h2>Redirect</h2>
-  <button (click)="redirect()">New page</button>
-</div>
-TESTTT LOGIN
+<html style="background-color:darkblue;">
+<head>
+  <title>Login Page</title>
+</head>
+<body>
+  <img src="/src/assets/logo.png" />
+  <div class="flex-container">
+    <mat-card class="login-card">
+
+      <button mat-raised-button class="login-button" (click)="login()">Sign in with Microsoft</button>
+    </mat-card>
+  </div>
+
+</body>
+</html>

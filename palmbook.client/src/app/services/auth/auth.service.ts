@@ -31,7 +31,7 @@ export class AuthService {
 
   microsoftLogout() {
     this.msalService.logoutRedirect({
-      postLogoutRedirectUri: location.origin
+      postLogoutRedirectUri: location.origin + "/login"
     });
   }
 }
