@@ -3,6 +3,7 @@ How to Run
 Running Search Service
 1. Go to Palmbook/Search Directory
 2. run docker compose up
+3. Search service is usable without web app with the help of postman
 
 Running WebApp
 1. Run PalmBook.Server which will open angular server
