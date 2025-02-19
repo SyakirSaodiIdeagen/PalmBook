@@ -22,7 +22,7 @@ export class SearchBarComponent implements AfterViewInit {
   searched = false;
   loggedIn = false;
   dataSource = new MatTableDataSource([]);
-  displayedColumns: string[] = ['name', 'type', 'source', 'action'];
+  displayedColumns: string[] = ['name', 'source', 'createDate', 'updateDate', 'action'];
   private searchSubject = new Subject<string>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -80,6 +80,10 @@ export class SearchBarComponent implements AfterViewInit {
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  openFile(url: string): void {
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 
   logout() {

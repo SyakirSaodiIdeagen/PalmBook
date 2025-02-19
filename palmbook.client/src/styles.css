@@ -1,3 +1,7 @@
-body {
+html, body {
   background: linear-gradient(135deg, #001f3f, #00509d); /* Dark blue gradient */
+}
+/* Set Arial, Sans-serif as the global font */
+* {
+  font-family: Arial, Sans-serif;
 }

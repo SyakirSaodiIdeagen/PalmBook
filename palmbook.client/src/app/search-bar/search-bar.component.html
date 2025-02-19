@@ -1,51 +1,77 @@
-<div class="top-bar">
-  <button mat-button color="primary" class="logout-btn" (click)="logout()">Sign out</button>
-</div>
+<!-- Top Bar with Logout Button -->
+<html>
+<body>
 
-<!-- Search Box -->
-<div class="search-container" [ngClass]="{'search-top': searched}">
-  <div class="search-bar">
-    <input type="text" (input)="onSearchInput()"  [(ngModel)]="query" placeholder="Search..." />
+  <div class="top-bar">
+
+    <button mat-icon-button class="sign-out-button" (click)="logout()">
+      <img src="https://cdn-icons-png.flaticon.com/512/4400/4400629.png" alt="Logout Logo" class="logo">
+    </button>
+   
+
+
   </div>
-</div>
 
-<!-- Table inside a Card -->
-<div *ngIf="searched" class="table-container">
-  <mat-card appearance="outlined" class="custom-card">
-    <mat-card-content>
-      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <div class="welcome-text" *ngIf="!searched">Welcome to PalmBook</div>
 
-        <!-- File Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> File Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
-        </ng-container>
+  <!-- Search Box -->
+  <div class="search-container" [ngClass]="{'search-top': searched}">
+    <div class="search-bar">
+      <input type="text"
+             (input)="onSearchInput()"
+             [(ngModel)]="query"
+             placeholder="Search..."
+             aria-label="Search" />
+    </div>
+  </div>
 
-        <!-- Created Column -->
-        <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
-          <td mat-cell *matCellDef="let element"> {{element.createdDateTime}} </td>
-        </ng-container>
+  <!-- Table inside a Card (Only visible when searched) -->
+  <div *ngIf="searched" class="table-container">
+    <mat-card appearance="outlined" class="custom-card">
+      <mat-card-content>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-        <!-- Last Update Column -->
-        <ng-container matColumnDef="source">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Update </th>
-          <td mat-cell *matCellDef="let element"> {{element.lastModifiedDateTime}} </td>
-        </ng-container>
+          <!-- File Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> File Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+          </ng-container>
 
-        <!-- Action Column -->
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef> Action </th>
-          <td mat-cell *matCellDef="let file">
-            <a mat-button color="accent" [href]="file.webUrl" target="_blank" rel="noopener noreferrer" download>
-              Open
-            </a>
-          </td>
-        </ng-container>
+          <!-- Source Column -->
+          <ng-container matColumnDef="source">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Source </th>
+            <td mat-cell *matCellDef="let element"> {{element.source}} </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </mat-card-content>
-  </mat-card>
-</div>
+          <!-- Created Column -->
+          <ng-container matColumnDef="createDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+            <td mat-cell *matCellDef="let element"> {{element.createdDateTime}} </td>
+          </ng-container>
+
+          <!-- Last Update Column -->
+          <ng-container matColumnDef="updateDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Update </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastModifiedDateTime}} </td>
+          </ng-container>
+
+          <!-- Action Column -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let file">
+              <button mat-button class="custom-button" (click)="openFile(file.webUrl)">
+                Open
+              </button>
+            </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</body>
+</html>

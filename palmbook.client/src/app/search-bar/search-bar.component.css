@@ -53,3 +53,80 @@
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.search-container {
+  display: flex;
+  margin-top: 20%;
+  transition: margin-top 0.3s;
+  width: 100%;
+}
+
+  .search-container.search-top {
+    justify-content: flex-start;
+    margin-top: 0;
+    position: fixed;
+    top: 0;
+    width: 60%;
+    z-index: 1000;
+    padding: 10px;
+  }
+.welcome-text {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  z-index: 999; /* Ensure it's above other elements */
+}
+
+
+.search-bar {
+  width: 70%; /* Increased width */
+  max-width: 600px; /* Restrict max size */
+}
+
+  .search-bar input {
+    width: 100%;
+    padding: 15px; /* Increased padding */
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    font-size: 18px; /* Increased font size */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+
+    .search-bar input:focus {
+      border-color: #6a0dad;
+      box-shadow: 0 0 8px rgba(106, 13, 173, 0.4);
+    }
+
+.custom-button {
+    height: 25px;
+  border-radius: 25px;
+  background-color: cornflowerblue; /* Green */
+  color: white;
+}
+
+  .custom-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+.sign-out-button {
+  background-color: white; /* White background for the button */
+  border-radius: 50%; /* Makes the button round */
+  padding: 10px; /* Padding to make the button a bit larger */
+  border: none; /* Remove the border */
+  width: 45px; /* Button size */
+  height: 45px; /* Button size */
+  display: flex; /* Use Flexbox to center content */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+}
+
+.logo {
+  width: 30px; /* Logo size */
+  height: 30px; /* Logo size */
+}
+

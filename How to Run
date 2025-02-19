@@ -9,3 +9,7 @@ Running WebApp
 1. Run PalmBook.Server which will open angular server
 2. Login
 3. Search
+
+Custom Config
+1. edit gdconf.json in Search/palmsearch/gdconf for google drive
+2. edit sharepointconf.json in Search/palmsearch/sharepointconf for sharepoint
