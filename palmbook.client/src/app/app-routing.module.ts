@@ -16,7 +16,6 @@ const routes: Routes = [
   {
     path: 'search-bar',
     component: SearchBarComponent,
-    canActivate: [MsalGuard], // Protect search-bar with MSAL Guard
   },
   {
     path: 'login',

@@ -15,13 +15,14 @@ type ElasticsearchHit struct {
 	CreatedDateTime      string `json:"createdDateTime"`
 	LastModifiedDateTime string `json:"lastModifiedDateTime"`
 	WebUrl               string `json:"webUrl"`
+	Source               string `json:"source"`
 }
 
 func Search(param string) []ElasticsearchHit {
 	es := GetEsClient()
 
 	// Escape the param to make it safe for wildcard query
-	//param = strings.ReplaceAll(param, "*", "\\*")
+	//param = strings.ReplaceAll(param, ".", "\\.")
 	//param = strings.ReplaceAll(param, "?", "\\?")
 
 	query := fmt.Sprintf(`{
@@ -81,6 +82,7 @@ func Search(param string) []ElasticsearchHit {
 		esHit.CreatedDateTime = source["createdDateTime"].(string)
 		esHit.LastModifiedDateTime = source["lastModifiedDateTime"].(string)
 		esHit.WebUrl = source["webUrl"].(string)
+		esHit.Source = source["source"].(string)
 
 		// Print the structured data
 		fmt.Printf("Elasticsearch Hit: %+v\n", esHit)
