@@ -1,0 +1,10 @@
+How to Run
+
+Running Search Service
+1. Go to Palmbook/Search Directory
+2. run docker compose up
+
+Running WebApp
+1. Run PalmBook.Server which will open angular server
+2. Login
+3. Search
