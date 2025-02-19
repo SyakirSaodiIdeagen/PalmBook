@@ -40,6 +40,7 @@ type ListItem struct {
 	ContentType    ContentType `json:"contentType,omitempty"`
 	Id             string      `json:"id,omitempty"`
 	Name           string      `json:"Name,omitempty"`
+	Source         string      `json:"source,omitempty"`
 }
 
 type Fields struct {
@@ -127,7 +128,11 @@ func cleanUp() {
 	docToBeDeleted := []string{}
 
 	for _, doc := range existDocs {
-		// Check if the doc exists as a key in the cache
+
+		if strings.HasPrefix(doc, "gd") {
+			continue
+		}
+
 		if item, found := items[doc]; found {
 			fmt.Printf("Found doc in cache: Key: %s, Value: %v\n", doc, item.Object)
 		} else {
@@ -256,6 +261,7 @@ func GetListItems(glr GetListResponse) {
 
 		for i := range glir.Value {
 			glir.Value[i].Name = glir.Value[i].Fields.Name
+			glir.Value[i].Source = "Sharepoint"
 		}
 
 		log.Printf("glir: %v", glir.Value)
