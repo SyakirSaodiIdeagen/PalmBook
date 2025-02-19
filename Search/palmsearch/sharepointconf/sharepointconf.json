@@ -1,0 +1,7 @@
+{
+  "tenant_id": "3192a717-1c36-4a32-b40f-d91972b86f32",
+  "client_id": "1afd0015-0d04-4b6f-bffa-e2d55db24f0b",
+  "client_secret": "wyi8Q~grqvwTcs9RJsb~nvtF_KiH.y9wF37jUbQC",
+  "scope": "https://graph.microsoft.com/.default",
+  "grant_type": "client_credentials"
+}

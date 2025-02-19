@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6104eef8-2813-4d13-9fed-3a17318a4e4f" name="Changes" comment="fix drive model">
+      <change afterPath="$PROJECT_DIR$/Search/palmsearch/sharepointconf/sharepointconf.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Search/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Search/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Search/palmsearch/elasticsearch/elasticsearch.go" beforeDir="false" afterPath="$PROJECT_DIR$/Search/palmsearch/elasticsearch/elasticsearch.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Search/palmsearch/googledrive/googledrive.go" beforeDir="false" afterPath="$PROJECT_DIR$/Search/palmsearch/googledrive/googledrive.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/palmbook.client/src/app/auth-config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/palmbook.client/src/app/auth-config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Search/gdconf/gd2.json" beforeDir="false" afterPath="$PROJECT_DIR$/Search/palmsearch/gdconf/gd2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go" beforeDir="false" afterPath="$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +51,7 @@
     "git-widget-placeholder": "main",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "C:/Workspace/hackaton3/PalmBook/palmbook.client/src/app/search-bar",
+    "last_opened_file_path": "C:/Workspace/hackaton3/PalmBook/Search/palmsearch/sharepointconf",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -60,6 +60,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Workspace\hackaton3\PalmBook\Search\palmsearch\sharepointconf" />
+      <recent name="C:\Workspace\hackaton3\PalmBook\Search\palmsearch\gdconf" />
       <recent name="C:\Workspace\hackaton3\PalmBook\palmbook.client\src\app\search-bar" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -119,17 +121,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go</url>
-          <line>135</line>
+          <line>143</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go</url>
-          <line>138</line>
+          <line>146</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go</url>
-          <line>129</line>
+          <line>137</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
@@ -156,6 +158,16 @@
           <url>file://$PROJECT_DIR$/Search/palmsearch/googledrive/googledrive.go</url>
           <line>73</line>
           <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go</url>
+          <line>287</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/Search/palmsearch/sharepoint/sharepoint.go</url>
+          <line>293</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

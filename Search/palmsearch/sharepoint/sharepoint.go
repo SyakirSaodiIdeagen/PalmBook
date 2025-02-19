@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"palmsearch/elasticsearch"
 	"strings"
 	"time"
@@ -41,6 +42,13 @@ type ListItem struct {
 	Id             string      `json:"id,omitempty"`
 	Name           string      `json:"Name,omitempty"`
 	Source         string      `json:"source,omitempty"`
+}
+type AppRegistrationConfig struct {
+	TenantId     string `json:"tenant_id"`
+	ClientId     string `json:"client_id"`
+	ClientSecret string `json:"client_secret"`
+	Scope        string `json:"scope"`
+	GrantType    string `json:"grant_type"`
 }
 
 type Fields struct {
@@ -275,13 +283,31 @@ func GetListItems(glr GetListResponse) {
 
 }
 
+func getAppRegistrationConfig() AppRegistrationConfig {
+	jsonData, err := os.ReadFile("/sharepointconf/sharepointconf.json")
+	if err != nil {
+		log.Fatalf("Failed to read JSON key file: %v", err)
+	}
+
+	var config AppRegistrationConfig
+	err = json.Unmarshal(jsonData, &config)
+	if err != nil {
+		fmt.Println("Error decoding JSON:", err)
+		return AppRegistrationConfig{}
+	}
+	return config
+}
+
 func GetTenantAccessToken(tenantId string) {
 	formData := url.Values{}
-	tenantId = "3192a717-1c36-4a32-b40f-d91972b86f32"
-	formData.Set("client_id", "1afd0015-0d04-4b6f-bffa-e2d55db24f0b")
-	formData.Set("client_secret", "wyi8Q~grqvwTcs9RJsb~nvtF_KiH.y9wF37jUbQC")
-	formData.Set("scope", "https://graph.microsoft.com/.default")
-	formData.Set("grant_type", "client_credentials")
+
+	config := getAppRegistrationConfig()
+
+	tenantId = config.TenantId
+	formData.Set("client_id", config.ClientId)
+	formData.Set("client_secret", config.ClientSecret)
+	formData.Set("scope", config.Scope)
+	formData.Set("grant_type", config.GrantType)
 
 	req, err := http.NewRequest("POST", fmt.Sprintf("https://login.microsoftonline.com/%v/oauth2/v2.0/token", tenantId), strings.NewReader(formData.Encode()))
 	if err != nil {
