@@ -20,24 +20,32 @@ html, body {
   height: 100vh; /* Ensures full viewport height */
 }
 
-/* Style the login card */
-.login-card {
-  background-color: white;
-  padding: 20px;
-  text-align: center;
-  width: 40%;
-  border-radius: 16px; /* Rounded edges */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 /* Style the login button */
 .login-button {
   margin-top: 20px;
   width: 100%;
-  max-width: 250px;
-  background-color: darkblue !important;
-  color: white !important;
+  max-width: 300px;
+  background-color: white !important;
+  color: black !important;
+  border-radius: initial;
+  border-radius: 12px;
+  height: 40px;
+}
+.button-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.text {
+  flex: 95;
+  font-size: 20px; /* You can adjust the font size as needed */
+}
+
+.icon {
+  flex: 5;
+  width: 25px;
+  height: 25px;
+  margin-left: 8px;
 }

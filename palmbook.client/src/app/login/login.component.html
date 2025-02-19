@@ -6,10 +6,12 @@
   
   <div class="flex-container">
     <img src="assets/logo.png" width="250" height="250" />
-    <mat-card class="login-card">
-
-      <button mat-raised-button class="login-button" (click)="login()">Sign in with Microsoft</button>
-    </mat-card>
+      <button mat-raised-button class="login-button" (click)="login()">
+        <div class="button-content">
+          <span class="text">Sign in with Microsoft</span>
+          <img src="https://img.icons8.com/?size=100&id=22989&format=png&color=000000" alt="Microsoft Icon" class="icon">
+        </div>
+      </button>
   </div>
 
 </body>
