@@ -34,6 +34,7 @@ export class SearchBarComponent implements AfterViewInit {
     const user = this.authService.getUserDetails();
     console.log(user);
     this.loggedIn = !!user;
+    localStorage.setItem('user', JSON.stringify(user));
 
     if (!this.loggedIn) {
       this.router.navigate(['/login']);
